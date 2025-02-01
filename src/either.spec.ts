@@ -1,6 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
 import { Either, left, right } from "./either";
 
+/**
+ * Test suite for the Either monad implementation.
+ * Tests both Right and Left variants, along with all static methods and complex scenarios.
+ */
 describe("Either", () => {
 	describe("Right", () => {
 		it("should create Right value", () => {
@@ -64,6 +68,14 @@ describe("Either", () => {
 			expect(rightCallback).toHaveBeenCalledWith(5);
 			expect(leftCallback).not.toHaveBeenCalled();
 		});
+
+		it("should handle match pattern", () => {
+			const result = right(5).match({
+				right: (value) => value * 2,
+				left: (error) => error,
+			});
+			expect(result).toBe(10);
+		});
 	});
 
 	describe("Left", () => {
@@ -76,7 +88,7 @@ describe("Either", () => {
 
 		it("should not map Left value", () => {
 			// @ts-ignore
-			const l = left("error").map((x) => x * 2);
+			const l = left("error").map((x: number) => x * 2);
 			expect(l.unwrapError()).toBe("error");
 		});
 
@@ -123,6 +135,15 @@ describe("Either", () => {
 			expect(rightCallback).not.toHaveBeenCalled();
 			expect(leftCallback).toHaveBeenCalledWith("error");
 		});
+
+		it("should handle match pattern", () => {
+			const result = left("error").match({
+				// @ts-ignore
+				right: (value) => value * 2,
+				left: (error) => error,
+			});
+			expect(result).toBe("error");
+		});
 	});
 
 	describe("Static Methods", () => {
@@ -139,6 +160,15 @@ describe("Either", () => {
 				const result = await Either.fromPromise(promise);
 				expect(result.isLeft()).toBe(true);
 				expect(result.unwrapError()).toBe("error");
+			});
+
+			it("should handle async errors", async () => {
+				const promise = Promise.resolve().then(() => {
+					throw new Error("async error");
+				});
+				const result = await Either.fromPromise(promise);
+				expect(result.isLeft()).toBe(true);
+				expect(result.unwrapError()).toBeInstanceOf(Error);
 			});
 		});
 
@@ -160,6 +190,18 @@ describe("Either", () => {
 				expect(result.isLeft()).toBe(true);
 				expect(result.unwrapError()).toBe("error");
 			});
+
+			it("should handle zero as valid value", () => {
+				const result = Either.fromNullable(0, "error");
+				expect(result.isRight()).toBe(true);
+				expect(result.unwrap()).toBe(0);
+			});
+
+			it("should handle empty string as valid value", () => {
+				const result = Either.fromNullable("", "error");
+				expect(result.isRight()).toBe(true);
+				expect(result.unwrap()).toBe("");
+			});
 		});
 
 		describe("combine", () => {
@@ -176,6 +218,12 @@ describe("Either", () => {
 				expect(result.isLeft()).toBe(true);
 				expect(result.unwrapError()).toBe("error");
 			});
+
+			it("should handle empty array", () => {
+				const result = Either.combine([]);
+				expect(result.isRight()).toBe(true);
+				expect(result.unwrap()).toEqual([]);
+			});
 		});
 
 		describe("sequence", () => {
@@ -191,6 +239,12 @@ describe("Either", () => {
 				const result = Either.sequence(eithers);
 				expect(result.isLeft()).toBe(true);
 				expect(result.unwrapError()).toEqual(["error1", "error2"]);
+			});
+
+			it("should handle empty array", () => {
+				const result = Either.sequence([]);
+				expect(result.isRight()).toBe(true);
+				expect(result.unwrap()).toEqual([]);
 			});
 		});
 	});
@@ -224,6 +278,31 @@ describe("Either", () => {
 			expect(mapSpy).not.toHaveBeenCalled();
 			expect(filterSpy).not.toHaveBeenCalled();
 			expect(flatMapSpy).not.toHaveBeenCalled();
+		});
+
+		it("should handle nested Either operations", () => {
+			const result = right(5)
+				.flatMap((x) => right(x + 1))
+				.flatMap((x) => (x > 5 ? right(x * 2) : left("too small")))
+				// @ts-ignore
+				.map((x) => x.toString());
+
+			expect(result.isRight()).toBe(true);
+			expect(result.unwrap()).toBe("12");
+		});
+
+		it("should handle async operations chain", async () => {
+			const asyncOperation = async (x: number) => {
+				await Promise.resolve();
+				return x * 2;
+			};
+
+			const result = await Either.fromPromise(asyncOperation(5))
+				.then((either) => either.flatMap((x) => right(x + 1)))
+				.then((either) => either.map((x) => x.toString()));
+
+			expect(result.isRight()).toBe(true);
+			expect(result.unwrap()).toBe("11");
 		});
 	});
 });
