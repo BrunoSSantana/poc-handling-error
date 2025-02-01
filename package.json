@@ -1,0 +1,27 @@
+{
+  "name": "poc-handling-error",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --experimental-strip-types src/main.ts",
+    "start:doctor:error": "clinic doctor --on-port=\"autocannon -c 100 -d 30 http://localhost:3000/with-error?fail=true \" -- node --experimental-strip-types src/main.ts",
+    "start:doctor:either": "clinic doctor --on-port=\"autocannon -c 100 -d 30 http://localhost:3000/with-either?fail=true \" -- node --experimental-strip-types src/main.ts",
+    "start:flame:error": "clinic flame --on-port=\"autocannon -c 100 -d 30 http://localhost:3000/with-error?fail=true \" -- node --experimental-strip-types src/main.ts",
+    "start:flame:either": "clinic flame --on-port=\"autocannon -c 100 -d 30 http://localhost:3000/with-either?fail=true \" -- node --experimental-strip-types src/main.ts",
+    "start:bubble:error": "clinic bubbleprof --on-port=\"autocannon -c 100 -d 30 http://localhost:3000/with-error?fail=true \" -- node --experimental-strip-types src/main.ts",
+    "start:bubble:either": "clinic bubbleprof --on-port=\"autocannon -c 100 -d 30 http://localhost:3000/with-either?fail=true \" -- node --experimental-strip-types src/main.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autocannon": "8.0.0",
+    "clinic": "13.0.0",
+    "fastify": "5.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.13.0"
+  }
+}
