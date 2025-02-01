@@ -1,4 +1,4 @@
-# 📘 **Documentação: Testes de Performance - Throw vs Either🚀**
+# 📘 **Testes de Performance - Throw vs Either🚀**
 
 Bem-vindo ao projeto de **benchmarking** para avaliar a performance de duas abordagens de tratamento de erros, avaliando duas abordagens no Node.js:
 
