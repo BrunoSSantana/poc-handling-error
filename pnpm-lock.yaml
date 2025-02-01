@@ -13,23 +13,26 @@ importers:
         version: 8.0.0
       clinic:
         specifier: 13.0.0
-        version: 13.0.0
+        version: 13.0.0(encoding@0.1.13)
       fastify:
         specifier: 5.2.1
         version: 5.2.1
     devDependencies:
+      '@types/autocannon':
+        specifier: 7.12.6
+        version: 7.12.6
       '@types/node':
         specifier: 22.13.0
         version: 22.13.0
       '@vitest/coverage-v8':
         specifier: 3.0.4
-        version: 3.0.4(vitest@3.0.4(@types/node@22.13.0)(tsx@4.19.2))
+        version: 3.0.4(vitest@3.0.4(@types/node@22.13.0)(tsx@4.19.2)(yaml@2.7.0))
       tsx:
         specifier: 4.19.2
         version: 4.19.2
       vitest:
         specifier: 3.0.4
-        version: 3.0.4(@types/node@22.13.0)(tsx@4.19.2)
+        version: 3.0.4(@types/node@22.13.0)(tsx@4.19.2)(yaml@2.7.0)
 
 packages:
 
@@ -554,6 +557,9 @@ packages:
   '@tensorflow/tfjs-core@3.21.0':
     resolution: {integrity: sha512-YSfsswOqWfd+M4bXIhT3hwtAb+IV8+ODwIxwdFR/7jTAPZP1wMVnSlpKnXHAN64HFOiP+Tm3HmKusEZ0+09A0w==}
     engines: {yarn: '>= 1.3.2'}
+
+  '@types/autocannon@7.12.6':
+    resolution: {integrity: sha512-eBluTewWVKr1XlCPz3hYuzs+5JPme+Jh01sKpGPSnWg4wep1Oz2hpGn+dmcITl+uxYoV+rnhA+8LMengL+zcVw==}
 
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
@@ -1295,6 +1301,9 @@ packages:
   emoji-regex@9.2.2:
     resolution: {integrity: sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==}
 
+  encoding@0.1.13:
+    resolution: {integrity: sha512-ETBauow1T35Y/WZMkio9jiM0Z5xjHHmJ4XmjZOq1l/dXz3lr2sRn87nJy20RupqSh1F2m3HHPSp8ShIPQJrJ3A==}
+
   end-of-stream@1.4.4:
     resolution: {integrity: sha512-+uw1inIHVPQoaVuHzRyXd21icM+cnt4CzD5rW+NC1wjOUSTOs+Te7FOv7AhN7vS9x/oIyhLP5PR1H+phQAHu5Q==}
 
@@ -1706,6 +1715,10 @@ packages:
 
   iconv-lite@0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
+    engines: {node: '>=0.10.0'}
+
+  iconv-lite@0.6.3:
+    resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
     engines: {node: '>=0.10.0'}
 
   ieee754@1.2.1:
@@ -3218,6 +3231,11 @@ packages:
   y18n@4.0.3:
     resolution: {integrity: sha512-JKhqTOwSrqNA1NY5lSztJ1GrBiUodLMmIZuLiDaMRJ+itFd+ABVE8XBjOvIWL+rSqNDC74LCSFmlb/U4UZ4hJQ==}
 
+  yaml@2.7.0:
+    resolution: {integrity: sha512-+hSoy/QHluxmC9kCIJyL/uyFmLmc+e5CFR5Wa+bpIhIj85LVb9ZH2nVnqrHoSvKogwODv0ClqZkmiSSaIH5LTA==}
+    engines: {node: '>= 14'}
+    hasBin: true
+
   yargs-parser@15.0.3:
     resolution: {integrity: sha512-/MVEVjTXy/cGAjdtQf8dW3V9b97bPN7rNn8ETj6BmAQL7ibC7O1Q9SPJbGjgh3SlwoBNXMzj/ZGIj8mBgl12YA==}
 
@@ -3320,13 +3338,13 @@ snapshots:
       stream-template: 0.0.10
       webfontloader: 1.6.28
 
-  '@clinic/doctor@11.0.0':
+  '@clinic/doctor@11.0.0(encoding@0.1.13)':
     dependencies:
       '@clinic/clinic-common': 7.1.0
       '@clinic/node-trace-log-join': 2.0.0
       '@clinic/trace-events-parser': 2.0.0
-      '@tensorflow/tfjs-backend-cpu': 3.21.0(@tensorflow/tfjs-core@3.21.0)
-      '@tensorflow/tfjs-core': 3.21.0
+      '@tensorflow/tfjs-backend-cpu': 3.21.0(@tensorflow/tfjs-core@3.21.0(encoding@0.1.13))
+      '@tensorflow/tfjs-core': 3.21.0(encoding@0.1.13)
       async: 3.2.6
       clipboard-copy: 4.0.1
       d3-array: 2.12.1
@@ -3338,7 +3356,7 @@ snapshots:
       debug: 4.4.0
       distributions: 2.2.0
       endpoint: 0.4.5
-      hidden-markov-model-tf: 4.0.0(@tensorflow/tfjs-core@3.21.0)
+      hidden-markov-model-tf: 4.0.0(@tensorflow/tfjs-core@3.21.0(encoding@0.1.13))
       minify-stream: 2.1.0
       mkdirp: 1.0.4
       on-net-listen: 1.1.2
@@ -3674,13 +3692,13 @@ snapshots:
     dependencies:
       defer-to-connect: 1.1.3
 
-  '@tensorflow/tfjs-backend-cpu@3.21.0(@tensorflow/tfjs-core@3.21.0)':
+  '@tensorflow/tfjs-backend-cpu@3.21.0(@tensorflow/tfjs-core@3.21.0(encoding@0.1.13))':
     dependencies:
-      '@tensorflow/tfjs-core': 3.21.0
+      '@tensorflow/tfjs-core': 3.21.0(encoding@0.1.13)
       '@types/seedrandom': 2.4.34
       seedrandom: 3.0.5
 
-  '@tensorflow/tfjs-core@3.21.0':
+  '@tensorflow/tfjs-core@3.21.0(encoding@0.1.13)':
     dependencies:
       '@types/long': 4.0.2
       '@types/offscreencanvas': 2019.3.0
@@ -3688,10 +3706,14 @@ snapshots:
       '@types/webgl-ext': 0.0.30
       '@webgpu/types': 0.1.16
       long: 4.0.0
-      node-fetch: 2.6.13
+      node-fetch: 2.6.13(encoding@0.1.13)
       seedrandom: 3.0.5
     transitivePeerDependencies:
       - encoding
+
+  '@types/autocannon@7.12.6':
+    dependencies:
+      '@types/node': 22.13.0
 
   '@types/estree@1.0.6': {}
 
@@ -3715,7 +3737,7 @@ snapshots:
 
   '@types/webgl-ext@0.0.30': {}
 
-  '@vitest/coverage-v8@3.0.4(vitest@3.0.4(@types/node@22.13.0)(tsx@4.19.2))':
+  '@vitest/coverage-v8@3.0.4(vitest@3.0.4(@types/node@22.13.0)(tsx@4.19.2)(yaml@2.7.0))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 1.0.2
@@ -3729,7 +3751,7 @@ snapshots:
       std-env: 3.8.0
       test-exclude: 7.0.1
       tinyrainbow: 2.0.0
-      vitest: 3.0.4(@types/node@22.13.0)(tsx@4.19.2)
+      vitest: 3.0.4(@types/node@22.13.0)(tsx@4.19.2)(yaml@2.7.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -3740,13 +3762,13 @@ snapshots:
       chai: 5.1.2
       tinyrainbow: 2.0.0
 
-  '@vitest/mocker@3.0.4(vite@6.0.11(@types/node@22.13.0)(tsx@4.19.2))':
+  '@vitest/mocker@3.0.4(vite@6.0.11(@types/node@22.13.0)(tsx@4.19.2)(yaml@2.7.0))':
     dependencies:
       '@vitest/spy': 3.0.4
       estree-walker: 3.0.3
       magic-string: 0.30.17
     optionalDependencies:
-      vite: 6.0.11(@types/node@22.13.0)(tsx@4.19.2)
+      vite: 6.0.11(@types/node@22.13.0)(tsx@4.19.2)(yaml@2.7.0)
 
   '@vitest/pretty-format@3.0.4':
     dependencies:
@@ -4234,10 +4256,10 @@ snapshots:
 
   cli-width@2.2.1: {}
 
-  clinic@13.0.0:
+  clinic@13.0.0(encoding@0.1.13):
     dependencies:
       '@clinic/bubbleprof': 10.0.0
-      '@clinic/doctor': 11.0.0
+      '@clinic/doctor': 11.0.0(encoding@0.1.13)
       '@clinic/flame': 13.0.0
       '@clinic/heap-profiler': 5.0.0
       any-shell-escape: 0.1.1
@@ -4641,6 +4663,11 @@ snapshots:
   emoji-regex@8.0.0: {}
 
   emoji-regex@9.2.2: {}
+
+  encoding@0.1.13:
+    dependencies:
+      iconv-lite: 0.6.3
+    optional: true
 
   end-of-stream@1.4.4:
     dependencies:
@@ -5110,9 +5137,9 @@ snapshots:
 
   hdr-histogram-percentiles-obj@3.0.0: {}
 
-  hidden-markov-model-tf@4.0.0(@tensorflow/tfjs-core@3.21.0):
+  hidden-markov-model-tf@4.0.0(@tensorflow/tfjs-core@3.21.0(encoding@0.1.13)):
     dependencies:
-      '@tensorflow/tfjs-core': 3.21.0
+      '@tensorflow/tfjs-core': 3.21.0(encoding@0.1.13)
       ml-kmeans: 4.2.1
       ndarray: 1.0.19
       ndarray-cholesky-factorization: 1.0.2
@@ -5162,6 +5189,11 @@ snapshots:
   iconv-lite@0.4.24:
     dependencies:
       safer-buffer: 2.1.2
+
+  iconv-lite@0.6.3:
+    dependencies:
+      safer-buffer: 2.1.2
+    optional: true
 
   ieee754@1.2.1: {}
 
@@ -5686,9 +5718,11 @@ snapshots:
     dependencies:
       lower-case: 1.1.4
 
-  node-fetch@2.6.13:
+  node-fetch@2.6.13(encoding@0.1.13):
     dependencies:
       whatwg-url: 5.0.0
+    optionalDependencies:
+      encoding: 0.1.13
 
   normalize-html-whitespace@0.2.0: {}
 
@@ -6647,13 +6681,13 @@ snapshots:
       core-util-is: 1.0.2
       extsprintf: 1.3.0
 
-  vite-node@3.0.4(@types/node@22.13.0)(tsx@4.19.2):
+  vite-node@3.0.4(@types/node@22.13.0)(tsx@4.19.2)(yaml@2.7.0):
     dependencies:
       cac: 6.7.14
       debug: 4.4.0
       es-module-lexer: 1.6.0
       pathe: 2.0.2
-      vite: 6.0.11(@types/node@22.13.0)(tsx@4.19.2)
+      vite: 6.0.11(@types/node@22.13.0)(tsx@4.19.2)(yaml@2.7.0)
     transitivePeerDependencies:
       - '@types/node'
       - jiti
@@ -6668,7 +6702,7 @@ snapshots:
       - tsx
       - yaml
 
-  vite@6.0.11(@types/node@22.13.0)(tsx@4.19.2):
+  vite@6.0.11(@types/node@22.13.0)(tsx@4.19.2)(yaml@2.7.0):
     dependencies:
       esbuild: 0.24.2
       postcss: 8.5.1
@@ -6677,11 +6711,12 @@ snapshots:
       '@types/node': 22.13.0
       fsevents: 2.3.3
       tsx: 4.19.2
+      yaml: 2.7.0
 
-  vitest@3.0.4(@types/node@22.13.0)(tsx@4.19.2):
+  vitest@3.0.4(@types/node@22.13.0)(tsx@4.19.2)(yaml@2.7.0):
     dependencies:
       '@vitest/expect': 3.0.4
-      '@vitest/mocker': 3.0.4(vite@6.0.11(@types/node@22.13.0)(tsx@4.19.2))
+      '@vitest/mocker': 3.0.4(vite@6.0.11(@types/node@22.13.0)(tsx@4.19.2)(yaml@2.7.0))
       '@vitest/pretty-format': 3.0.4
       '@vitest/runner': 3.0.4
       '@vitest/snapshot': 3.0.4
@@ -6697,8 +6732,8 @@ snapshots:
       tinyexec: 0.3.2
       tinypool: 1.0.2
       tinyrainbow: 2.0.0
-      vite: 6.0.11(@types/node@22.13.0)(tsx@4.19.2)
-      vite-node: 3.0.4(@types/node@22.13.0)(tsx@4.19.2)
+      vite: 6.0.11(@types/node@22.13.0)(tsx@4.19.2)(yaml@2.7.0)
+      vite-node: 3.0.4(@types/node@22.13.0)(tsx@4.19.2)(yaml@2.7.0)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 22.13.0
@@ -6793,6 +6828,9 @@ snapshots:
   xtend@4.0.2: {}
 
   y18n@4.0.3: {}
+
+  yaml@2.7.0:
+    optional: true
 
   yargs-parser@15.0.3:
     dependencies:
