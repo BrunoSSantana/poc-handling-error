@@ -14,7 +14,7 @@ const simulateDBQuery = async () => {
 
 // Função que pode falhar
 const fetchData = async (shouldFail: boolean) => {
-	/* await simulateDBQuery(); */
+	await simulateDBQuery();
 	if (shouldFail) {
 		throw new Error("Erro na API!");
 	}
@@ -23,7 +23,7 @@ const fetchData = async (shouldFail: boolean) => {
 
 // Função que retorna Either (Pattern Functional)
 const fetchDataEither = async (shouldFail: boolean) => {
-	/* await simulateDBQuery(); */
+	await simulateDBQuery();
 	if (shouldFail) {
 		return { isLeft: true, error: "Erro na API!" };
 	}
@@ -33,10 +33,7 @@ const fetchDataEither = async (shouldFail: boolean) => {
 // 🛑 API que lança erro
 server.get<{ Querystring: QueryParams }>(
 	"/with-error",
-	async (request, reply) => {
-		const result = await fetchData(request.query.fail === "true");
-		return result;
-	},
+	async (request, reply) => fetchData(request.query.fail === "true"),
 );
 
 // ✅ API que usa Either (não lança erro)
@@ -61,4 +58,6 @@ const start = async () => {
 	}
 };
 
-await start();
+await start().then(() =>
+	console.log("Server running at: http://localhost:3000"),
+);
